@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حسابي - منصة الإعلانات</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-bullhorn"></i>
+                <span>منصة الإعلانات</span>
+            </a>
+            
+            <div class="header-actions">
+                <button class="action-btn">
+                    <i class="fas fa-bell"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container" id="account-page">
+        <div class="account-container">
+            <div class="account-header">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h2 class="user-name" id="user-name">أحمد محمد</h2>
+                <p class="user-email" id="user-email">ahmed@example.com</p>
+                
+                <div class="account-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="ads-count">0</div>
+                        <div class="stat-label">إعلانات</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="orders-count">0</div>
+                        <div class="stat-label">طلبات</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="rating">5.0</div>
+                        <div class="stat-label">تقييم</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="account-content">
+                <div class="section">
+                    <h3 class="section-title"><i class="fas fa-info-circle"></i> معلومات الحساب</h3>
+                    
+                    <ul class="info-list">
+                        <li class="info-item">
+                            <span class="info-label">رقم الجوال</span>
+                            <span id="user-phone">+966500123456</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">تاريخ التسجيل</span>
+                            <span id="signup-date">15 مارس 2023</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">حالة الحساب</span>
+                            <span style="color: #06d6a0;" id="account-status">مفعل</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3 class="section-title"><i class="fas fa-lock"></i> الأمان</h3>
+                    
+                    <ul class="info-list">
+                        <li class="info-item">
+                            <span class="info-label">البريد الإلكتروني</span>
+                            <span id="user-email-info">ahmed@example.com</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">كلمة المرور</span>
+                            <span>**********</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">رقم الهاتف</span>
+                            <span id="user-phone-info">+966500123456</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <button class="logout-btn" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    تسجيل الخروج
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>الرئيسية</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-bell"></i>
+            <span>الإشعارات</span>
+        </a>
+        <a href="create-ad.html" class="nav-item add-btn">
+            <i class="fas fa-plus"></i>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-headset"></i>
+            <span>الدعم</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-ellipsis-h"></i>
+            <span>المزيد</span>
+        </a>
+    </div>
+    
+    <script src="firebase-app.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // تحميل بيانات المستخدم
+            loadUserData();
+            
+            // تسجيل الخروج
+            const logoutBtn = document.getElementById('logout-btn');
+            logoutBtn.addEventListener('click', logoutUser);
+        });
+    </script>
+</body>
+</html>

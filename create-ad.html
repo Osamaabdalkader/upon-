@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء إعلان - منصة الإعلانات</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-bullhorn"></i>
+                <span>منصة الإعلانات</span>
+            </a>
+            
+            <div class="header-actions">
+                <button class="action-btn" id="save-draft-btn">
+                    <i class="fas fa-save"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="create-ad-container">
+            <h2 class="section-title">إنشاء إعلان جديد</h2>
+            
+            <div class="upload-area" id="upload-area">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h3>انقر لرفع الصور</h3>
+                <p>أو اسحب وأسقط الصور هنا</p>
+                <input type="file" id="image-upload" multiple style="display: none;">
+                
+                <div class="image-preview" id="image-preview"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="ad-title">عنوان الإعلان</label>
+                <input type="text" id="ad-title" class="form-control" placeholder="أدخل عنواناً واضحاً وجذاباً">
+            </div>
+            
+            <div class="form-group">
+                <label for="ad-category">الفئة</label>
+                <select id="ad-category" class="form-control">
+                    <option value="">اختر الفئة</option>
+                    <option value="cars">سيارات</option>
+                    <option value="realestate">عقارات</option>
+                    <option value="electronics">إلكترونيات</option>
+                    <option value="furniture">أثاث</option>
+                    <option value="clothing">ملابس</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="ad-price">السعر (ريال سعودي)</label>
+                <input type="number" id="ad-price" class="form-control" placeholder="أدخل السعر">
+            </div>
+            
+            <div class="form-group">
+                <label for="ad-location">الموقع</label>
+                <input type="text" id="ad-location" class="form-control" placeholder="أدخل موقعك">
+            </div>
+            
+            <div class="form-group">
+                <label for="ad-description">وصف الإعلان</label>
+                <textarea id="ad-description" class="form-control" rows="5" placeholder="صف منتجك بالتفصيل..."></textarea>
+            </div>
+            
+            <button class="btn btn-primary" id="publish-btn">نشر الإعلان الآن</button>
+        </div>
+    </div>
+    
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>الرئيسية</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-bell"></i>
+            <span>الإشعارات</span>
+        </a>
+        <a href="create-ad.html" class="nav-item add-btn">
+            <i class="fas fa-plus"></i>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-headset"></i>
+            <span>الدعم</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-ellipsis-h"></i>
+            <span>المزيد</span>
+        </a>
+    </div>
+    
+    <script src="firebase-app.js"></script>
+    <script src="auth.js"></script>
+    <script src="database.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // تهيئة معاينة الصور
+            initImagePreview();
+            
+            // نشر الإعلان
+            const publishBtn = document.getElementById('publish-btn');
+            publishBtn.addEventListener('click', createNewAd);
+        });
+        
+        function initImagePreview() {
+            const uploadArea = document.getElementById('upload-area');
+            const imageUpload = document.getElementById('image-upload');
+            const imagePreview = document.getElementById('image-preview');
+            
+            uploadArea.addEventListener('click', () => {
+                imageUpload.click();
+            });
+            
+            imageUpload.addEventListener('change', function() {
+                const files = this.files;
+                
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        const previewItem = document.createElement('div');
+                        previewItem.className = 'preview-item';
+                        previewItem.innerHTML = `
+                            <img src="${e.target.result}" alt="Preview">
+                            <div class="remove-image">
+                                <i class="fas fa-times"></i>
+                            </div>
+                        `;
+                        
+                        previewItem.querySelector('.remove-image').addEventListener('click', function() {
+                            previewItem.remove();
+                        });
+                        
+                        imagePreview.appendChild(previewItem);
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب - منصة الإعلانات</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-overlay active">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h2>انضم إلينا!</h2>
+                <p>أنشئ حسابك الجديد في خطوات بسيطة</p>
+            </div>
+            <div class="auth-form">
+                <div class="form-group">
+                    <label for="fullname">الاسم الكامل</label>
+                    <input type="text" id="fullname" class="form-control" placeholder="ادخل اسمك الكامل">
+                </div>
+                <div class="form-group">
+                    <label for="phone">رقم الهاتف</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="ادخل رقم هاتفك">
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">البريد الإلكتروني</label>
+                    <input type="email" id="signup-email" class="form-control" placeholder="ادخل بريدك الإلكتروني">
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">كلمة المرور</label>
+                    <input type="password" id="signup-password" class="form-control" placeholder="اختر كلمة مرور قوية">
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">تأكيد كلمة المرور</label>
+                    <input type="password" id="confirm-password" class="form-control" placeholder="أعد إدخال كلمة المرور">
+                </div>
+                <button class="btn btn-primary" id="signup-btn">إنشاء حساب</button>
+                <div class="auth-footer">
+                    <p>لديك حساب بالفعل؟ <a href="login.html">تسجيل الدخول</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="firebase-app.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const signupBtn = document.getElementById('signup-btn');
+            signupBtn.addEventListener('click', signUpUser);
+        });
+    </script>
+</body>
+</html>
